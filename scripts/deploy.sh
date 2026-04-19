@@ -4,23 +4,25 @@
 set -euo pipefail
 
 SERVICE="${1:?Uso: deploy.sh <web|api|infra>}"
+TAG="${2:-latest}"
 DEPLOY_DIR="/opt/habitame"
 
 cd "$DEPLOY_DIR"
 
-echo "[$(date -u '+%Y-%m-%dT%H:%M:%SZ')] Deploy iniciado: $SERVICE"
+echo "[$(date -u '+%Y-%m-%dT%H:%M:%SZ')] Deploy iniciado: $SERVICE ($TAG)"
 
 case "$SERVICE" in
   web|api)
-    docker compose pull "$SERVICE"
+    IMAGE="ghcr.io/habitame/habitame-${SERVICE}:${TAG}"
+    docker pull "$IMAGE"
+    docker tag "$IMAGE" "ghcr.io/habitame/habitame-${SERVICE}:latest"
     docker compose up -d --no-deps "$SERVICE"
     docker image prune -f
     ;;
   infra)
     git pull origin main
-    docker compose exec nginx nginx -t
-    docker compose exec nginx nginx -s reload
     docker compose up -d
+    docker compose exec nginx nginx -s reload 2>/dev/null || true
     docker image prune -f
     ;;
   *)

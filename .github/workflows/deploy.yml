@@ -1,21 +1,22 @@
 name: Deploy Infrastructure Changes
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'docker-compose.yml'
       - 'nginx/**'
       - 'scripts/**'
+      - '.github/workflows/**'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy infra via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: cd /opt/habitame && bash scripts/deploy.sh infra
+      - name: Trigger deploy via webhook
+        run: |
+          curl -f -X POST https://habitame.xyz/hooks/deploy \
+            -H "X-Webhook-Token: ${{ secrets.WEBHOOK_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -d '{"service":"infra"}'
