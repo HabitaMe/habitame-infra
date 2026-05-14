@@ -67,7 +67,7 @@ cd "$DEPLOY_DIR"
 cat > /tmp/habitame-http-only.conf << 'NGINX_HTTP'
 server {
     listen 80;
-    server_name habitame.xyz www.habitame.xyz api.habitame.xyz uploads.habitame.xyz;
+    server_name habitame.xyz www.habitame.xyz api.habitame.xyz uploads.habitame.xyz admin.habitame.xyz;
     location /.well-known/acme-challenge/ {
         root /var/www/certbot;
     }
@@ -99,7 +99,8 @@ docker run --rm \
         -d "$DOMAIN" \
         -d "www.$DOMAIN" \
         -d "api.$DOMAIN" \
-        -d "uploads.$DOMAIN"
+        -d "uploads.$DOMAIN" \
+        -d "admin.$DOMAIN"
 
 docker stop habitame-nginx-temp && docker rm habitame-nginx-temp || true
 
