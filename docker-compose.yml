@@ -72,6 +72,26 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  admin:
+    image: ghcr.io/habitame/habitame-admin:latest
+    container_name: habitame-admin
+    restart: unless-stopped
+    depends_on:
+      - api
+    networks:
+      - habitame_net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:80"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
   nginx:
     image: nginx:1.27-alpine
     container_name: habitame-nginx
@@ -89,6 +109,7 @@ services:
       - uploads_data:/var/www/uploads:ro
     depends_on:
       - web
+      - admin
       - api
     networks:
       - habitame_net
