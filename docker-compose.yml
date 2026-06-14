@@ -92,27 +92,33 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  # nginx interno: ya NO expone 80/443 ni hace TLS (eso lo hace el edge proxy Traefik).
+  # Sigue sirviendo uploads, /slides y estaticos, y enruta web/admin/api por server_name.
   nginx:
     image: nginx:1.27-alpine
     container_name: habitame-nginx
     restart: unless-stopped
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    ports:
-      - "80:80"
-      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - certbot_certs:/etc/letsencrypt:ro
-      - certbot_www:/var/www/certbot:ro
       - uploads_data:/var/www/uploads:ro
+      - ./nginx/static:/var/www/static:ro
     depends_on:
       - web
       - admin
       - api
     networks:
       - habitame_net
+      - edge
+    labels:
+      - traefik.enable=true
+      - "traefik.http.routers.habitame.rule=Host(`habitame.xyz`) || Host(`admin.habitame.xyz`) || Host(`api.habitame.xyz`) || Host(`uploads.habitame.xyz`)"
+      - traefik.http.routers.habitame.entrypoints=websecure
+      - traefik.http.routers.habitame.tls.certresolver=le
+      - traefik.http.services.habitame.loadbalancer.server.port=80
+      - traefik.docker.network=edge
     logging:
       driver: json-file
       options:
@@ -120,11 +126,14 @@ services:
         max-file: "3"
 
 networks:
+  # Red interna real de habitame (donde viven api/web/db). Referenciada por su
+  # nombre exacto para garantizar que nginx se une a ELLA y no a una nueva.
   habitame_net:
-    driver: bridge
+    external: true
+    name: habitame_habitame_net
+  edge:
+    external: true
 
 volumes:
   pg_data:
   uploads_data:
-  certbot_certs:
-  certbot_www:
