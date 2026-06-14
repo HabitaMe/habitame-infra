@@ -114,7 +114,7 @@ services:
       - edge
     labels:
       - traefik.enable=true
-      - "traefik.http.routers.habitame.rule=Host(`habitame.xyz`) || Host(`admin.habitame.xyz`) || Host(`api.habitame.xyz`) || Host(`uploads.habitame.xyz`)"
+      - "traefik.http.routers.habitame.rule=Host(`habitame.xyz`) || Host(`www.habitame.xyz`) || Host(`admin.habitame.xyz`) || Host(`api.habitame.xyz`) || Host(`uploads.habitame.xyz`)"
       - traefik.http.routers.habitame.entrypoints=websecure
       - traefik.http.routers.habitame.tls.certresolver=le
       - traefik.http.services.habitame.loadbalancer.server.port=80
