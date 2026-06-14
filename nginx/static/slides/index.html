@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HabitaMe — PFC DAM 2025/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
+<style>
+  /* ── PALETTE ────────────────────────────── */
+  :root {
+    --blue:         #1E90FF;
+    --blue2:        #5DADE2;
+    --blue-dim:     rgba(30,144,255,.10);
+    --blue-border:  rgba(30,144,255,.25);
+    --green:        #28A745;
+    --green-dim:    rgba(40,167,69,.12);
+    --green-border: rgba(40,167,69,.30);
+    --orange:       #FF8C42;
+    --orange-dim:   rgba(255,140,66,.10);
+    --orange-border:rgba(255,140,66,.30);
+    --red:          #DC3545;
+    --red-dim:      rgba(220,53,69,.10);
+    --red-border:   rgba(220,53,69,.30);
+    --amber:        #FFC107;
+    --amber-dim:    rgba(255,193,7,.12);
+    --amber-border: rgba(255,193,7,.35);
+    --dark:         #333333;
+    --muted:        #777777;
+    --gray:         #F2F2F2;
+    --gray2:        #E5E5E5;
+    --white:        #FFFFFF;
+    --card-bg:      #F8FAFE;
+    --code-bg:      #1e2638;
+  }
+
+  /* ── REVEAL RESET ───────────────────────── */
+  .reveal-viewport,
+  .reveal-viewport .reveal-viewport { background: var(--white); }
+
+  .reveal-viewport::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(30,144,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,144,255,.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .reveal {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 21px;
+    color: var(--dark);
+  }
+  .reveal .slides { z-index: 1; }
+
+  /* ── SLIDE BASE — centrado ──────────────── */
+  .reveal .slides section {
+    text-align: left;
+    padding: 0 56px;
+    box-sizing: border-box;
+  }
+
+  /* ── HEADINGS ───────────────────────────── */
+  .reveal h1, .reveal h2, .reveal h3 {
+    font-family: 'Syne', sans-serif;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    margin-bottom: .55em;
+    text-shadow: none;
+  }
+  .reveal h1 { font-size: 3em;   font-weight: 800; line-height: 1.05; }
+  .reveal h2 { font-size: 1.75em; font-weight: 700; }
+  .reveal h3 { font-size: 1.1em;  font-weight: 600; color: var(--blue); margin-bottom: .35em; }
+
+  .accent  { color: var(--blue); }
+  .accent2 { color: var(--orange); }
+  .muted   { color: var(--muted); }
+
+  /* ── SLIDE LABEL ────────────────────────── */
+  .slide-label {
+    position: absolute; top: 22px; right: 56px;
+    font-family: 'JetBrains Mono', monospace; font-size: .5em;
+    color: var(--blue2); letter-spacing: .12em; text-transform: uppercase;
+    background: var(--blue-dim); border: 1px solid var(--blue-border);
+    padding: .2em .7em; border-radius: 20px;
+  }
+
+  /* ── DIVIDER ────────────────────────────── */
+  .divider {
+    width: 40px; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--blue2));
+    border-radius: 2px; margin: .35em 0 .9em;
+  }
+
+  /* ── LISTS ──────────────────────────────── */
+  .reveal ul { list-style: none; padding: 0; margin: 0; }
+  .reveal ul li {
+    padding: .3em 0 .3em 1.5em; position: relative;
+    color: var(--dark); font-size: .87em; line-height: 1.55;
+  }
+  .reveal ul li::before {
+    content: '▸'; position: absolute; left: 0; color: var(--blue);
+  }
+
+  /* ── CODE ───────────────────────────────── */
+  .reveal pre {
+    background: var(--code-bg) !important;
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 8px;
+    box-shadow: 0 2px 16px rgba(0,0,0,.12);
+    margin: .55em 0; font-size: .59em; width: 100%;
+  }
+  .reveal pre code {
+    font-family: 'JetBrains Mono', monospace !important;
+    padding: 1.15em 1.4em !important;
+    background: transparent !important;
+  }
+  .reveal code:not(pre code) {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--blue-dim);
+    border: 1px solid var(--blue-border);
+    padding: .1em .4em; border-radius: 4px;
+    font-size: .83em; color: var(--blue);
+  }
+
+  /* ── TABLES ─────────────────────────────── */
+  .reveal table {
+    width: 100%; border-collapse: collapse;
+    font-size: .78em; margin: .55em 0;
+    box-shadow: 0 1px 8px rgba(0,0,0,.06);
+    border-radius: 8px; overflow: hidden;
+  }
+  .reveal table th {
+    background: var(--blue-dim); color: var(--blue);
+    font-family: 'Syne', sans-serif; font-weight: 600;
+    padding: .6em 1em; text-align: left;
+    border-bottom: 2px solid var(--blue-border);
+  }
+  .reveal table td {
+    padding: .5em 1em; color: var(--dark);
+    border-bottom: 1px solid var(--gray2);
+    background: var(--white);
+  }
+  .reveal table tr:last-child td { border-bottom: none; }
+  .reveal table tr:hover td { background: var(--gray); }
+
+  /* ── SVG ICON ───────────────────────────── */
+  .ico {
+    display: inline-block; flex-shrink: 0;
+    fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    overflow: visible;
+  }
+  .ico-sm { width: 1em;   height: 1em;   vertical-align: -0.12em; }
+  .ico-md { width: 1.2em; height: 1.2em; vertical-align: -0.15em; }
+
+  /* ── CARD ICON ──────────────────────────── */
+  .card-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 2.6em; height: 2.6em;
+    background: var(--blue-dim);
+    border: 1px solid var(--blue-border);
+    border-radius: 10px; margin-bottom: .5em; color: var(--blue);
+  }
+  .card-icon .ico { width: 1.25em; height: 1.25em; }
+  .card-icon.green  { background: var(--green-dim);  border-color: var(--green-border);  color: var(--green); }
+  .card-icon.orange { background: var(--orange-dim); border-color: var(--orange-border); color: var(--orange); }
+
+  /* ── CARDS ──────────────────────────────── */
+  .cards { display: grid; gap: 13px; margin-top: .55em; }
+  .cards-2 { grid-template-columns: 1fr 1fr; }
+  .cards-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--gray2);
+    border-radius: 10px; padding: .95em 1.1em;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .card:hover {
+    border-color: var(--blue-border);
+    box-shadow: 0 4px 16px rgba(30,144,255,.1);
+  }
+  .card.green .card-icon { background: var(--green-dim); border-color: var(--green-border); color: var(--green); }
+  .card.green .card-title { color: var(--green); }
+  .card.green:hover { border-color: var(--green-border); box-shadow: 0 4px 16px rgba(40,167,69,.1); }
+  .card.orange .card-icon { background: var(--orange-dim); border-color: var(--orange-border); color: var(--orange); }
+  .card.orange .card-title { color: var(--orange); }
+  .card.orange:hover { border-color: var(--orange-border); }
+
+  .card-title {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: .81em; color: var(--blue); margin-bottom: .3em;
+    display: flex; align-items: center; gap: .35em;
+  }
+  .card-body { font-size: .72em; color: var(--muted); line-height: 1.55; }
+
+  /* ── FLOW ───────────────────────────────── */
+  .flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: .65em 0; }
+  .flow-v { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+  .flow-v .flow-arrow { padding-left: 14px; }
+
+  .flow-box {
+    background: var(--white); border: 1px solid var(--gray2);
+    border-radius: 7px; padding: .38em .85em;
+    font-family: 'JetBrains Mono', monospace; font-size: .6em;
+    color: var(--dark); white-space: nowrap;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .flow-box.hi { border-color: var(--blue); color: var(--blue); background: var(--blue-dim); }
+  .flow-arrow { color: var(--blue2); font-size: .78em; font-weight: 700; }
+
+  /* ── STATUS BADGES ──────────────────────── */
+  .status {
+    display: inline-block; padding: .14em .6em; border-radius: 20px;
+    font-size: .67em; font-weight: 600; font-family: 'JetBrains Mono', monospace;
+  }
+  .s-review { background: var(--amber-dim);  color: #9a7000;   border: 1px solid var(--amber-border); }
+  .s-active { background: var(--green-dim);  color: var(--green); border: 1px solid var(--green-border); }
+  .s-reject { background: var(--red-dim);    color: var(--red);   border: 1px solid var(--red-border); }
+
+  /* ── ARCH BLOCK ─────────────────────────── */
+  .arch {
+    background: var(--code-bg);
+    border-radius: 10px; padding: 1.1em 1.5em;
+    font-family: 'JetBrains Mono', monospace; font-size: .57em;
+    line-height: 2; color: #a8b4c8; margin: .65em 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,.12);
+  }
+  .arch .b { color: #7eb3ff; }
+  .arch .g { color: #5bc99c; }
+  .arch .o { color: #ffb347; }
+
+  /* ── HIGHLIGHT BOX ──────────────────────── */
+  .hbox {
+    background: var(--blue-dim);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 8px 8px 0; padding: .6em 1em;
+    margin: .55em 0; font-size: .79em; color: var(--dark);
+    display: flex; align-items: flex-start; gap: .5em;
+  }
+  .hbox .ico { flex-shrink: 0; margin-top: .15em; color: var(--blue); }
+  .hbox.green  { background: var(--green-dim);  border-color: var(--green);  }
+  .hbox.green  .ico { color: var(--green); }
+  .hbox.orange { background: var(--orange-dim); border-color: var(--orange); }
+  .hbox.orange .ico { color: var(--orange); }
+
+  /* ── TAGS ───────────────────────────────── */
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; margin: .55em 0; }
+  .tag {
+    background: var(--gray); border: 1px solid var(--gray2);
+    border-radius: 20px; padding: .22em .75em;
+    font-size: .62em; font-family: 'JetBrains Mono', monospace; color: var(--muted);
+  }
+  .tag.b { background: var(--blue-dim);   border-color: var(--blue-border);   color: var(--blue); }
+  .tag.g { background: var(--green-dim);  border-color: var(--green-border);  color: var(--green); }
+  .tag.o { background: var(--orange-dim); border-color: var(--orange-border); color: var(--orange); }
+
+  /* ── TIMELINE ───────────────────────────── */
+  .timeline { display: flex; flex-direction: column; gap: 9px; margin-top: .5em; }
+  .tl-item { display: flex; gap: 13px; align-items: flex-start; }
+  .tl-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--blue); flex-shrink: 0; margin-top: 5px;
+  }
+  .tl-dot.dim  { background: var(--muted); }
+  .tl-dot.done { background: var(--green); box-shadow: 0 0 0 3px var(--green-dim); }
+  .tl-content { font-size: .75em; }
+  .tl-title { font-weight: 600; color: var(--dark); display: flex; align-items: center; gap: .4em; }
+  .tl-sub   { color: var(--muted); font-size: .9em; margin-top: .1em; }
+  .tl-check { color: var(--green); display: inline-flex; }
+  .tl-check svg { width: .9em; height: .9em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ── STAT GRID ──────────────────────────── */
+  .stat-grid { display: grid; gap: 10px; margin-top: .65em; }
+  .stat-grid-4 { grid-template-columns: repeat(4,1fr); }
+  .stat-grid-6 { grid-template-columns: repeat(6,1fr); }
+  .stat {
+    background: var(--white);
+    border: 1px solid var(--gray2);
+    border-radius: 10px; padding: .7em .5em; text-align: center;
+    box-shadow: 0 2px 8px rgba(30,144,255,.07);
+  }
+  .stat-num   { font-family: 'Syne', sans-serif; font-size: 1.7em; font-weight: 800; color: var(--blue); line-height: 1; }
+  .stat-label { font-size: .57em; color: var(--muted); margin-top: .3em; line-height: 1.3; }
+
+  /* ── COVERAGE BAR ───────────────────────── */
+  .cov-bar {
+    background: var(--gray); border-radius: 4px;
+    overflow: hidden; height: 8px; margin: .3em 0 .1em;
+  }
+  .cov-fill { height: 100%; background: linear-gradient(90deg, var(--green), #5bc99c); border-radius: 4px; }
+  .cov-label { font-size: .67em; color: var(--muted); display: flex; justify-content: space-between; }
+
+  /* ── 2 COLS ─────────────────────────────── */
+  .cols { display: grid; gap: 1.8em; align-items: start; }
+  .c2  { grid-template-columns: 1fr 1fr; }
+  .c64 { grid-template-columns: 60fr 40fr; }
+  .c46 { grid-template-columns: 40fr 60fr; }
+
+  /* ── COVER ──────────────────────────────── */
+  .cover-kicker {
+    font-family: 'JetBrains Mono', monospace; font-size: .58em;
+    color: var(--blue); letter-spacing: .15em; text-transform: uppercase;
+    margin-bottom: .8em;
+  }
+  .cover-stripe {
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--blue2), var(--orange));
+    border-radius: 2px; margin: .5em 0 1.1em;
+  }
+  .cover-meta {
+    margin-top: 2em; display: flex; gap: 2em;
+    font-size: .67em; color: var(--muted);
+  }
+  .cover-meta span { color: var(--dark); font-weight: 600; }
+
+  /* ── REVEAL UI ──────────────────────────── */
+  .reveal .progress { color: var(--blue); height: 3px; }
+  .reveal .controls { color: var(--blue); }
+  .reveal .slide-number {
+    background: transparent;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .5em; color: var(--muted);
+  }
+
+  /* ── BADGE ──────────────────────────────── */
+  .badge {
+    display: inline-block;
+    background: var(--blue-dim); border: 1px solid var(--blue-border);
+    color: var(--blue); font-family: 'JetBrains Mono', monospace;
+    font-size: .52em; padding: .18em .6em; border-radius: 4px;
+    vertical-align: middle; margin-left: .4em;
+  }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══════════════════════════════════════════
+     SLIDE 1 — PORTADA
+══════════════════════════════════════════ -->
+<section data-transition="fade">
+  <div class="cover-kicker">Proyecto Fin de Ciclo · DAM · IES El Cañaveral · 2025/2026</div>
+  <h1>Habita<span class="accent">Me</span></h1>
+  <div class="cover-stripe"></div>
+  <p style="font-size:.9em; color:var(--muted); max-width:600px; line-height:1.75;">
+    Plataforma digital de alquiler de habitaciones compartidas —
+    API REST, app móvil multiplataforma, panel de administración,
+    landing web e infraestructura completa en producción.
+  </p>
+  <div class="cover-meta">
+    <div>Autor 1 &nbsp;<span>Daniel Amores</span></div>
+    <div>Autor 2 &nbsp;<span>Samuel Copa</span></div>
+    <div>Tutor &nbsp;<span>Manuel J. Herrera Morgaz</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 2 — EL PROBLEMA
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">01 · Contexto</div>
+  <h2>El <span class="accent">problema</span></h2>
+  <div class="divider"></div>
+  <div class="cols c2" style="margin-top:.4em">
+    <div>
+      <ul>
+        <li>El precio del alquiler en España ha subido más de un <strong>40 %</strong> en la última década</li>
+        <li>Buscar habitación compartida sigue siendo un proceso <strong>opaco y frustrante</strong></li>
+        <li>Los anuncios sin verificar generan <strong>desconfianza</strong> en arrendadores e inquilinos</li>
+        <li>No existe una plataforma pensada para la convivencia a <strong>medio y largo plazo</strong></li>
+        <li>El fraude en plataformas de alquiler es uno de los problemas más denunciados</li>
+      </ul>
+    </div>
+    <div>
+      <table>
+        <thead><tr><th>Plataforma</th><th>Limitación</th></tr></thead>
+        <tbody>
+          <tr><td>Airbnb</td><td>Solo turismo / estancias cortas</td></tr>
+          <tr><td>Idealista</td><td>Orientado a inmuebles completos</td></tr>
+          <tr><td>Badi</td><td>Alcance reducido, sin moderación</td></tr>
+          <tr><td>Spotahome</td><td>Internacional, comisiones altas</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="hbox" style="margin-top:.9em">
+    <svg class="ico ico-md" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+    <span>Ninguna plataforma combina <strong>moderación de anuncios</strong>, <strong>app móvil nativa</strong> y <strong>gestión de convivencia</strong> en un solo producto.</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 3 — LA SOLUCIÓN
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">02 · Solución</div>
+  <h2>La solución: <span class="accent">HabitaMe</span></h2>
+  <div class="divider"></div>
+  <div class="stat-grid stat-grid-6" style="margin-bottom:.8em">
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Componentes de software</div></div>
+    <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Endpoints REST</div></div>
+    <div class="stat"><div class="stat-num">16</div><div class="stat-label">Tablas en BBDD</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Roles de usuario</div></div>
+    <div class="stat"><div class="stat-num">29</div><div class="stat-label">Tests automatizados</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Subdominios en prod.</div></div>
+  </div>
+  <div class="cards cards-3">
+    <div class="card">
+      <div class="card-icon">
+        <svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="card-title">Búsqueda inteligente</div>
+      <div class="card-body">Filtros por ciudad, precio, superficie y ocupantes con paginación infinita en la app</div>
+    </div>
+    <div class="card green">
+      <div class="card-icon green">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      </div>
+      <div class="card-title">Moderación de anuncios</div>
+      <div class="card-body">Cada publicación es revisada por un admin antes de aparecer en el catálogo público</div>
+    </div>
+    <div class="card orange">
+      <div class="card-icon orange">
+        <svg class="ico" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      </div>
+      <div class="card-title">App nativa multiplataforma</div>
+      <div class="card-body">Flutter para Android e iOS con un único código base, favoritos offline y refresh token transparente</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 4 — ARQUITECTURA
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">03 · Arquitectura</div>
+  <h2>Arquitectura del <span class="accent">sistema</span></h2>
+  <div class="divider"></div>
+  <div class="arch">
+    <span class="o">App Flutter</span> (Android/iOS) ─────┐<br>
+    <span class="o">Panel Admin</span> (Angular SPA) ─────┼──► <span class="b">nginx</span> :443 ──► <span class="g">Spring Boot API</span> :8080 ──► <span class="b">PostgreSQL</span> :5432<br>
+    <span class="o">Landing Web</span> (Angular SSR) ─────┘&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└──► <span class="b">uploads.habitame.xyz</span> (volumen compartido)
+  </div>
+  <table>
+    <thead><tr><th>Componente</th><th>Tecnología</th><th>Subdominio</th><th>Resp.</th></tr></thead>
+    <tbody>
+      <tr><td>API REST</td><td>Java 21 + Spring Boot 3.3</td><td>api.habitame.xyz</td><td>Daniel</td></tr>
+      <tr><td>App móvil</td><td>Flutter / Dart ^3.10</td><td>—</td><td>Samuel</td></tr>
+      <tr><td>Panel admin</td><td>Angular 21 + Material</td><td>admin.habitame.xyz</td><td>Daniel</td></tr>
+      <tr><td>Landing web</td><td>Angular 20 SSR</td><td>habitame.xyz</td><td>Daniel</td></tr>
+      <tr><td>Infra</td><td>Docker Compose + nginx 1.27 + Let's Encrypt</td><td>—</td><td>Daniel</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 5 — BASE DE DATOS
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">04 · Base de datos</div>
+  <h2>Base de datos <span class="accent">PostgreSQL 16</span></h2>
+  <div class="divider"></div>
+  <div class="cols c2">
+    <div>
+      <div class="arch" style="line-height:1.9">
+        <span class="g">users</span><br>
+        &nbsp;└─ <span class="b">properties</span> ─ <span class="b">rooms</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ property_images &nbsp;&nbsp;room_images<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ property_amenities &nbsp;room_amenities<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ <span class="g">property_reviews</span> &nbsp;&nbsp;<span class="g">room_reviews</span><br>
+        <span class="b">amenities</span> (scope: PROPERTY / ROOM / BOTH)<br>
+        countries → provinces → cities<br>
+        refresh_tokens &nbsp;·&nbsp; rentals &nbsp;·&nbsp; reviews
+      </div>
+      <div class="tags">
+        <span class="tag b">Flyway migrations</span>
+        <span class="tag b">3FN normalizado</span>
+        <span class="tag">ON DELETE CASCADE</span>
+        <span class="tag">ON DELETE SET NULL</span>
+        <span class="tag">Índices parciales únicos</span>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:.75em;color:var(--muted);margin-bottom:.5em">Decisión de diseño destacada:</p>
+      <pre><code class="language-sql">-- Solo 1 imagen principal por propiedad
+-- garantizado a nivel de BBDD, sin lógica extra
+CREATE UNIQUE INDEX uq_property_main
+  ON property_images(property_id)
+  WHERE is_main = TRUE;
+
+-- Solo 1 revisión activa por propiedad
+CREATE UNIQUE INDEX uq_active_review
+  ON property_reviews(property_id)
+  WHERE status = 'IN_REVIEW';</code></pre>
+      <div class="hbox green">
+        <svg class="ico ico-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Las tablas <code>rentals</code> y <code>reviews</code> ya están definidas, preparadas para la fase <strong>GestionaMe</strong>.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 6 — API SPRING BOOT
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">05 · Backend</div>
+  <h2>API REST <span class="accent">Spring Boot</span></h2>
+  <div class="divider"></div>
+  <div class="cols c64">
+    <div>
+      <table>
+        <thead><tr><th>Ruta</th><th>Acceso</th><th>Funcionalidad</th></tr></thead>
+        <tbody>
+          <tr><td><code>/v1/auth/**</code></td><td>Público</td><td>Login, registro, refresh, logout</td></tr>
+          <tr><td><code>/v1/public/**</code></td><td>Público</td><td>Catálogo, detalle, búsqueda con filtros</td></tr>
+          <tr><td><code>/v1/owner/**</code></td><td>Arrendador</td><td>CRUD propiedades, habitaciones, imágenes</td></tr>
+          <tr><td><code>/v1/user/**</code></td><td>Autenticado</td><td>Perfil, foto de usuario</td></tr>
+          <tr><td><code>/v1/admin/**</code></td><td>Admin</td><td>Moderación, usuarios, amenities, geografía</td></tr>
+        </tbody>
+      </table>
+      <div class="tags" style="margin-top:.65em">
+        <span class="tag b">Spring Security 6</span>
+        <span class="tag b">JWT HMAC-SHA256</span>
+        <span class="tag">BCrypt</span>
+        <span class="tag">JPA Specification</span>
+        <span class="tag">Flyway</span>
+        <span class="tag">SpringDoc / Swagger</span>
+        <span class="tag">Thumbnailator → WebP</span>
+        <span class="tag g">JaCoCo ≥ 70 %</span>
+      </div>
+    </div>
+    <div>
+      <pre><code class="language-java">// Filtros dinámicos sin JPQL manual
+Specification&lt;PropertyEntity&gt; spec =
+  Specification
+    .where(hasCity(filter.city()))
+    .and(hasPriceRange(
+           filter.minPrice(),
+           filter.maxPrice()))
+    .and(hasMaxOccupants(
+           filter.occupants()))
+    .and(hasStatus(ACTIVE));
+
+Page&lt;Property&gt; page =
+  repo.findAll(spec, pageable);</code></pre>
+      <div class="hbox" style="font-size:.75em">
+        <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <span>Documentación interactiva:<br><code>api.habitame.xyz/swagger-ui.html</code></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 7 — SEGURIDAD JWT
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">06 · Seguridad</div>
+  <h2>Autenticación <span class="accent">JWT</span></h2>
+  <div class="divider"></div>
+  <div class="cols c2">
+    <div>
+      <div class="flow-v">
+        <div class="flow-box">POST /v1/auth/login</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box hi">Access Token (1 h) + Refresh Token (24 h)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Authorization: Bearer &lt;token&gt;</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">JwtAuthenticationFilter — OncePerRequestFilter</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">validateToken → loadUser → SecurityContext</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">@PreAuthorize("hasRole('ADMIN')")</div>
+      </div>
+    </div>
+    <div>
+      <pre><code class="language-java">String token = header.substring(7);
+if (jwtProvider.validateToken(token)) {
+  String username =
+    jwtProvider.getUsername(token);
+  UserEntity user = userRepository
+    .findByUsername(username)
+    .orElse(null);
+  var auth =
+    new UsernamePasswordAuthenticationToken(
+      user, null,
+      List.of(new SimpleGrantedAuthority(
+        "ROLE_" + user.getRole())));
+  SecurityContextHolder.getContext()
+    .setAuthentication(auth);
+}</code></pre>
+      <ul style="margin-top:.5em">
+        <li>Refresh tokens <strong>persistidos y revocables</strong> en BBDD</li>
+        <li>Logout invalida el refresh token activo</li>
+        <li>CORS de <code>/v1/admin/**</code> restringido a <code>admin.habitame.xyz</code></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 8 — MODERACIÓN
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">07 · Funcionalidad clave</div>
+  <h2>Moderación de <span class="accent">anuncios</span></h2>
+  <div class="divider"></div>
+  <div class="cols c2">
+    <div>
+      <div class="flow-v">
+        <div class="flow-box">Arrendador publica propiedad / habitación</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box"><span class="status s-review">IN_REVIEW</span> — invisible al catálogo público</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Admin revisa desde el panel de administración</div>
+        <div class="flow-arrow">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+        <div style="display:flex;gap:8px">
+          <div class="flow-box"><span class="status s-active">ACTIVE</span> — visible</div>
+          <div class="flow-box"><span class="status s-reject">REJECTED</span> + comentario</div>
+        </div>
+        <div class="flow-arrow" style="padding-left:140px">↓</div>
+        <div class="flow-box">Arrendador ve el feedback → corrige → reenvía</div>
+      </div>
+    </div>
+    <div>
+      <pre><code class="language-java">@Transactional
+public PropertyReviewResponse resolveReview(
+    Integer propertyId,
+    PropertyReviewDecisionRequest req) {
+
+  // Rechazo obliga a justificarlo
+  if (req.status() == REJECTED
+      && isBlank(req.comment()))
+    throw new IllegalArgumentException(
+      "Se requiere comentario al rechazar");
+
+  review.setStatus(req.status());
+  review.setAdmin(
+    SecurityUtils.getCurrentUser());
+  review.setReviewedAt(LocalDateTime.now());
+
+  property.setStatus(
+    req.status() == APPROVED
+      ? ACTIVE : IN_REVIEW);
+
+  return mapper.toResponse(
+    reviewRepository.save(review));
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 9 — APP FLUTTER ARQUITECTURA
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">08 · App móvil</div>
+  <h2>App <span class="accent">Flutter</span> — Arquitectura</h2>
+  <div class="divider"></div>
+  <div class="cols c46">
+    <div>
+      <div class="arch" style="line-height:2">
+        lib/<br>
+        ├── <span class="o">shared/</span><br>
+        │&nbsp;&nbsp; ├── api_client.dart<br>
+        │&nbsp;&nbsp; ├── api_config.dart<br>
+        │&nbsp;&nbsp; └── models/<br>
+        └── <span class="o">features/</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp; ├── <span class="b">auth/</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp; ├── <span class="b">home/</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp; ├── <span class="b">owner/</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp; └── <span class="b">profile/</span>
+      </div>
+      <div class="tags">
+        <span class="tag o">Android + iOS</span>
+        <span class="tag">http ^1.6</span>
+        <span class="tag">shared_preferences</span>
+        <span class="tag">image_picker</span>
+        <span class="tag">image_cropper</span>
+        <span class="tag">url_launcher</span>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:.74em;color:var(--muted);margin-bottom:.5em">Refresh token transparente en <code>api_client.dart</code>:</p>
+      <pre><code class="language-dart">Future&lt;Response&gt; _handleResponse(
+    Response response,
+    Future&lt;Response&gt; Function(String) retry
+) async {
+  if (response.statusCode == 401) {
+    final token =
+      await _authService.refreshToken();
+    if (token != null)
+      return retry(token); // reintenta
+  }
+  if (response.statusCode >= 400)
+    throw ApiResponseError
+      .fromJson(jsonDecode(response.body));
+  return response;
+}</code></pre>
+      <div class="hbox orange" style="font-size:.74em">
+        <svg class="ico ico-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>El usuario nunca ve una pantalla de sesión caducada — la renovación es completamente transparente.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 10 — APP PANTALLAS INQUILINO
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">09 · App móvil</div>
+  <h2>App — Pantallas del <span class="accent">inquilino</span></h2>
+  <div class="divider"></div>
+  <div class="cards cards-3">
+    <div class="card">
+      <div class="card-icon">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="card-title">Catálogo</div>
+      <div class="card-body">Paginación infinita con <code>ScrollController</code>. Filtros: ciudad, precio mín/máx, ocupantes, ordenación. Pull-to-refresh.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+      <div class="card-title">Detalle de propiedad</div>
+      <div class="card-body">Carrusel de imágenes, lista de amenities, descripción completa y datos de habitaciones disponibles.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.13 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="card-title">Contacto directo</div>
+      <div class="card-body">Botón de correo y teléfono con <code>url_launcher</code> — abre directamente la app nativa del dispositivo.</div>
+    </div>
+  </div>
+  <div class="cards cards-2" style="margin-top:12px">
+    <div class="card green">
+      <div class="card-icon green">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="card-title">Favoritos offline</div>
+      <div class="card-body">Guardados en <code>SharedPreferences</code>. Funcionan sin conexión y se sincronizan al recargar el catálogo.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg class="ico" viewBox="0 0 24 24"><polyline points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <div class="card-title">Enrutado por rol</div>
+      <div class="card-body"><code>SplashScreen</code> lee el rol del token y redirige a <code>TenantMainScreen</code> o <code>OwnerMainScreen</code> automáticamente.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 11 — APP ARRENDADOR
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">10 · App móvil</div>
+  <h2>App — Flujo del <span class="accent">arrendador</span></h2>
+  <div class="divider"></div>
+  <div class="cols c2">
+    <div>
+      <div class="flow-v">
+        <div class="flow-box">Crear propiedad (título, tipo, ciudad, descripción)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Subir fotos → <code>image_picker</code> + <code>image_cropper</code></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Seleccionar amenities (wifi, parking, calefacción…)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Añadir habitaciones con precio, superficie, ocupantes</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box hi"><span class="status s-review">IN_REVIEW</span> — enviado a moderación</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Ver feedback del admin si fue rechazado</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box"><span class="status s-active">ACTIVE</span> — visible en el catálogo</div>
+      </div>
+    </div>
+    <div>
+      <ul>
+        <li>CRUD completo de <strong>propiedades y habitaciones</strong> propias</li>
+        <li>Recorte previo con <code>image_cropper</code> para mejor presentación visual</li>
+        <li>Flag <code>isMain</code> para establecer la <strong>foto de portada</strong></li>
+        <li>Visibilidad del <strong>estado de revisión</strong> en tiempo real</li>
+        <li>Edición de <strong>foto de perfil</strong> desde la propia app</li>
+        <li>Gestión de <strong>amenities</strong> por habitación y propiedad</li>
+      </ul>
+      <div class="hbox green" style="margin-top:.8em;font-size:.76em">
+        <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <span>El ciclo completo arrendador → moderación → publicación está probado en producción con usuarios reales.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 12 — PANEL DE ADMINISTRACIÓN
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">11 · Panel admin</div>
+  <h2>Panel de <span class="accent">administración</span></h2>
+  <div class="divider"></div>
+  <div class="cols c64">
+    <div>
+      <div class="cards" style="gap:9px">
+        <div class="card" style="padding:.7em 1em">
+          <div class="card-icon" style="width:2em;height:2em;margin-bottom:.35em">
+            <svg class="ico" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </div>
+          <div class="card-title">Cola de moderación</div>
+          <div class="card-body">Revisiones pendientes filtrables por estado (PENDING / APPROVED / REJECTED). Aprobación o rechazo con comentario obligatorio.</div>
+        </div>
+        <div class="card" style="padding:.7em 1em">
+          <div class="card-icon" style="width:2em;height:2em;margin-bottom:.35em">
+            <svg class="ico" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="card-title">Gestión de usuarios</div>
+          <div class="card-body">Listado paginado con filtros por nombre y rol. Detalle de cuenta. Activar / desactivar acceso.</div>
+        </div>
+        <div class="card" style="padding:.7em 1em">
+          <div class="card-icon" style="width:2em;height:2em;margin-bottom:.35em">
+            <svg class="ico" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          </div>
+          <div class="card-title">Amenities y geografía</div>
+          <div class="card-body">CRUD de amenities con scope (PROPERTY / ROOM / BOTH). Jerarquía países → provincias → ciudades.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="tags">
+        <span class="tag b">Angular 21</span>
+        <span class="tag b">Angular Material</span>
+        <span class="tag">SPA</span>
+        <span class="tag">Guards por rol</span>
+        <span class="tag">CORS restringido</span>
+      </div>
+      <div class="hbox" style="margin-top:.85em;font-size:.77em">
+        <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Solo <code>admin.habitame.xyz</code> puede llamar a <code>/v1/admin/**</code> — restricción doble: CORS en la API y guards de Angular en el cliente.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 13 — LANDING WEB
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">12 · Landing web</div>
+  <h2>Landing web <span class="accent">Angular SSR</span></h2>
+  <div class="divider"></div>
+  <div class="cols c2">
+    <div>
+      <ul>
+        <li><strong>Server-Side Rendering</strong> con Angular Universal — HTML generado en el servidor antes de enviarse al navegador</li>
+        <li>Indexación correcta por buscadores — <strong>SEO</strong> y <strong>Open Graph</strong> sin necesidad de JavaScript</li>
+        <li>Tiempo hasta primer pintado (FCP) significativamente menor que una SPA clásica</li>
+        <li>Consume la misma API pública que la app móvil (<code>/v1/public/**</code>)</li>
+        <li>Catálogo actualizado de propiedades disponibles en tiempo real</li>
+        <li>CTA para descargar la app móvil</li>
+      </ul>
+      <div class="tags" style="margin-top:.65em">
+        <span class="tag b">Angular 20</span>
+        <span class="tag b">Angular Universal SSR</span>
+        <span class="tag">Node.js :4000</span>
+        <span class="tag">nginx</span>
+        <span class="tag g">HTTPS</span>
+      </div>
+    </div>
+    <div>
+      <div class="arch" style="line-height:2">
+        Browser → <span class="b">nginx</span> :443<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="o">Angular SSR</span> :4000<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Node.js server)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="g">API</span> /v1/public/**<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+        HTML completamente renderizado<br>
+        enviado al navegador del usuario
+      </div>
+      <div class="hbox orange" style="font-size:.76em">
+        <svg class="ico ico-sm" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span>El SSR garantiza que Google indexe el contenido de los anuncios sin necesidad de ejecutar JavaScript.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 14 — INFRAESTRUCTURA
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">13 · Infraestructura</div>
+  <h2>Despliegue en <span class="accent">producción</span></h2>
+  <div class="divider"></div>
+  <div class="cols c2">
+    <div>
+      <pre><code class="language-yaml">services:
+  db:     postgres:16        # volumen persistente
+  api:    ghcr.io/.../api    # :8080 interno
+  web:    ghcr.io/.../web    # :4000 SSR
+  admin:  ghcr.io/.../admin  # :80  SPA
+  nginx:  nginx:1.27         # :443 EXPUESTO
+    # TLS auto · reverse proxy · uploads</code></pre>
+      <div class="flow" style="margin-top:.85em">
+        <div class="flow-box">git push main</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">GitHub Actions</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box hi">GHCR image</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">SSH VPS deploy</div>
+      </div>
+    </div>
+    <div>
+      <ul>
+        <li><strong>HTTPS automático</strong> con Let's Encrypt — renovación por cron diario</li>
+        <li><strong>Healthchecks</strong> en todos los contenedores con reinicio automático</li>
+        <li><code>restart: unless-stopped</code> en producción</li>
+        <li>Logs rotados: <strong>10 MB × 3</strong> por servicio</li>
+        <li>Imágenes en <strong>volumen compartido</strong> api ↔ nginx — servidas estáticamente</li>
+        <li>BBDD <strong>nunca expuesta</strong> al exterior</li>
+        <li>Pipeline completo en <strong>&lt; 4 minutos</strong> desde push hasta producción</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 15 — IMÁGENES
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">14 · Procesado de imágenes</div>
+  <h2>Pipeline de <span class="accent">imágenes</span></h2>
+  <div class="divider"></div>
+  <div class="cols c2">
+    <div>
+      <div class="flow-v">
+        <div class="flow-box">App sube imagen original (JPEG / PNG)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Validación MIME — rechaza no-imagen</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Thumbnailator redimensiona a 1280 × 960</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box hi">webp-imageio convierte a WebP</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">Guardada en volumen compartido /uploads</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-box">nginx sirve el fichero directamente</div>
+      </div>
+    </div>
+    <div>
+      <div class="cards cards-2" style="margin-bottom:.7em">
+        <div class="stat"><div class="stat-num">~35%</div><div class="stat-label">reducción media de peso</div></div>
+        <div class="stat"><div class="stat-num">0</div><div class="stat-label">peticiones API en lectura</div></div>
+      </div>
+      <pre><code class="language-java">String name = UUID.randomUUID() + ".webp";
+Path target = uploadDir
+  .resolve(folder).resolve(name);
+
+Thumbnails.of(file.getInputStream())
+  .size(1280, 960)
+  .keepAspectRatio(true)
+  .outputFormat("webp")
+  .toFile(target.toFile());
+
+return "/uploads/" + folder + "/" + name;</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 16 — CALIDAD Y PRUEBAS
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">15 · Calidad</div>
+  <h2>Pruebas y <span class="accent">calidad</span></h2>
+  <div class="divider"></div>
+  <div class="cols c2">
+    <div>
+      <table>
+        <thead><tr><th>Tipo</th><th>Nº</th><th>Qué cubre</th></tr></thead>
+        <tbody>
+          <tr><td>Controller <code>@WebMvcTest</code></td><td>15</td><td>Rutas, HTTP codes, auth</td></tr>
+          <tr><td>Servicio — unitarios</td><td>12</td><td>Lógica de negocio, Mockito</td></tr>
+          <tr><td>Seguridad JWT</td><td>2</td><td>Token válido / expirado / roto</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:1em">
+        <div class="cov-label" style="margin-bottom:.35em">
+          <span>Cobertura JaCoCo</span>
+          <span style="color:var(--green);font-weight:700">≥ 70 % exigido · 75 % actual</span>
+        </div>
+        <div class="cov-bar"><div class="cov-fill" style="width:75%"></div></div>
+        <div class="cov-label" style="margin-top:.2em"><span>0 %</span><span>100 %</span></div>
+      </div>
+      <div class="hbox green" style="margin-top:.75em">
+        <svg class="ico ico-sm" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Si la cobertura no supera el 70 %, el build de CI falla y no se despliega.</span>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:.75em;color:var(--muted);margin-bottom:.6em">Pruebas funcionales en producción:</p>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot done"></div>
+          <div class="tl-content">
+            <div class="tl-title">Flujo completo de moderación <span class="tl-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="tl-sub">Arrendador publica → admin modera → inquilino ve el anuncio</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot done"></div>
+          <div class="tl-content">
+            <div class="tl-title">Búsqueda y filtros <span class="tl-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="tl-sub">Ciudad, precio, paginación infinita, ordenación</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot done"></div>
+          <div class="tl-content">
+            <div class="tl-title">Refresh token automático <span class="tl-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="tl-sub">Token expirado → renovación transparente → reintento exitoso</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot done"></div>
+          <div class="tl-content">
+            <div class="tl-title">Subida, recorte y compresión de imágenes <span class="tl-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+            <div class="tl-sub">Desde image_cropper en Flutter hasta WebP servido por nginx</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 17 — PLANIFICACIÓN
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">16 · Planificación</div>
+  <h2>Planificación del <span class="accent">proyecto</span></h2>
+  <div class="divider"></div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot dim"></div>
+      <div class="tl-content">
+        <div class="tl-title">Dic 2024 — Formación previa</div>
+        <div class="tl-sub">Spring Boot, Flutter, PostgreSQL y Docker desde cero</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Ene 2025 — Bloque A: Usuarios y autenticación</div>
+        <div class="tl-sub">Modelo BBDD · API Auth + JWT + Refresh · Spring Security · Pantallas de login Flutter</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Feb 2025 — Bloque B: Propiedades y búsqueda</div>
+        <div class="tl-sub">CRUD API · JPA Specification · Imágenes + WebP · Catálogo Flutter · Favoritos offline</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Mar 2025 — Bloque C: Moderación, admin y web</div>
+        <div class="tl-sub">Cola de revisiones API · Panel Angular · Feedback en Flutter · Landing SSR</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Mar–Abr 2025 — Infraestructura, tests y cierre</div>
+        <div class="tl-sub">Docker Compose · VPS · CI/CD GitHub Actions · 29 tests · JaCoCo · Checkstyle</div>
+      </div>
+    </div>
+  </div>
+  <div class="hbox" style="margin-top:.85em;font-size:.76em">
+    <svg class="ico ico-sm" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <span><strong>15 semanas</strong> de desarrollo efectivo · 2 desarrolladores trabajando en paralelo con Git branching strategy</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 18 — CONCLUSIONES
+══════════════════════════════════════════ -->
+<section data-transition="slide">
+  <div class="slide-label">17 · Conclusiones</div>
+  <h2><span class="accent">Conclusiones</span></h2>
+  <div class="divider"></div>
+  <div class="cols c2">
+    <div>
+      <h3>Lo conseguido</h3>
+      <ul>
+        <li>Plataforma <strong>funcional y desplegada</strong> en producción en <code>habitame.xyz</code></li>
+        <li>Sistema de moderación que <strong>diferencia</strong> HabitaMe del resto del mercado</li>
+        <li>Arquitectura <strong>escalable</strong> lista para crecer con nuevos módulos</li>
+        <li>CI/CD que garantiza calidad en cada <code>git push</code></li>
+        <li>App multiplataforma con un único código base — <strong>Android e iOS</strong></li>
+        <li>Documentación de API <strong>interactiva y en producción</strong></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Decisiones conscientes</h3>
+      <ul>
+        <li>Mapa geolocalizado → <span class="muted">pospuesto a v2</span></li>
+        <li>Chat interno → <span class="muted">pospuesto a v2</span></li>
+        <li>Pasarela de pago → <span class="muted">pospuesto a v2</span></li>
+      </ul>
+      <div class="hbox green" style="margin-top:.7em;font-size:.77em">
+        <svg class="ico ico-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Las tablas <code>rentals</code> y <code>reviews</code> ya están en el esquema. La base para <strong>GestionaMe</strong> está construida.</span>
+      </div>
+      <div class="stat-grid stat-grid-4" style="margin-top:.85em">
+        <div class="stat"><div class="stat-num">19</div><div class="stat-label">Slides</div></div>
+        <div class="stat"><div class="stat-num">5</div><div class="stat-label">Repos GitHub</div></div>
+        <div class="stat"><div class="stat-num">15</div><div class="stat-label">Semanas</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Devs</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 19 — PROYECTOS FUTUROS + CIERRE
+══════════════════════════════════════════ -->
+<section data-transition="fade">
+  <div class="slide-label">18 · Cierre</div>
+  <h2>Proyectos <span class="accent">futuros</span></h2>
+  <div class="divider"></div>
+  <div class="cards cards-3" style="margin-bottom:1em">
+    <div class="card">
+      <div class="card-icon">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="card-title">Chat interno</div>
+      <div class="card-body">WebSockets con Spring + Flutter para mensajería directa entre arrendador e inquilino sin salir de la app</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="card-title">Mapa geolocalizado</div>
+      <div class="card-body">Google Maps / Mapbox en el detalle de habitación y vista alternativa al catálogo por zona</div>
+    </div>
+    <div class="card orange">
+      <div class="card-icon orange">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      </div>
+      <div class="card-title">GestionaMe</div>
+      <div class="card-body">Gestión del contrato activo: pagos de alquiler, incidencias y valoraciones al finalizar la estancia</div>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:1.2em">
+    <p style="font-family:'Syne',sans-serif; font-size:1em; color:var(--muted)">
+      Habita<span style="color:var(--blue)">Me</span>
+      &nbsp;·&nbsp; <code style="font-size:.78em">habitame.xyz</code>
+      &nbsp;·&nbsp; <code style="font-size:.78em">api.habitame.xyz/swagger-ui.html</code>
+    </p>
+    <p style="font-size:.8em; color:var(--muted); margin-top:.45em">
+      <strong style="color:var(--dark)">Daniel Amores</strong> · API · BBDD · Admin · Web · Infra
+      &nbsp;&nbsp;
+      <strong style="color:var(--dark)">Samuel Copa</strong> · App Flutter
+    </p>
+    <p style="font-family:'Syne',sans-serif; font-size:2em; font-weight:800; color:var(--blue); margin-top:.8em">¿Preguntas?</p>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    center: true,
+    slideNumber: 'c/t',
+    progress: true,
+    transition: 'slide',
+    transitionSpeed: 'fast',
+    backgroundTransition: 'fade',
+    width: 1280,
+    height: 720,
+    margin: 0.06,
+    plugins: [ RevealHighlight ]
+  });
+</script>
+</body>
+</html>
