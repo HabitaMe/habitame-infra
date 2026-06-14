@@ -126,8 +126,11 @@ services:
         max-file: "3"
 
 networks:
+  # Red interna real de habitame (donde viven api/web/db). Referenciada por su
+  # nombre exacto para garantizar que nginx se une a ELLA y no a una nueva.
   habitame_net:
-    driver: bridge
+    external: true
+    name: habitame_habitame_net
   edge:
     external: true
 
